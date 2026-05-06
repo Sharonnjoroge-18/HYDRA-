@@ -1,0 +1,112 @@
+/* Container for the whole hero section */
+.hero-container {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Fallback */
+  height: 100svh; /* Small viewport height (better for mobile browser UI) */
+  min-height: 100vh;
+  background-color: #000;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end; /* Pushes content to the bottom */
+  font-family: 'Inter', sans-serif;
+}
+
+/* Background Image styling */
+.hero-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Keeps the image proportional across screen sizes */
+  z-index: 1;
+}
+
+/* Gradient overlay to make white text readable */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 60%);
+  z-index: 2;
+}
+
+/* The content wrapper */
+.hero-content {
+  position: absolute;
+  z-index: 3;
+  bottom: 48%;
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  padding: 0 40px 80px 40px; /* Bottom padding for that lifted look */
+  display: flex;
+  justify-content: space-between; /* Spreads text left and button right */
+  align-items: flex-end;
+  box-sizing: border-box;
+}
+
+.hero-title {
+  color: #ffffff;
+  font-size: 3.5rem;
+  font-weight: 300;
+  line-height: 0.8;
+  margin: 0;
+  letter-spacing: -0.03em;
+}
+.hero-title span {
+  display: block;
+  font-size: 4rem;
+  font-weight: 700;
+  letter-spacing: normal;
+  margin-top: 12px;
+}
+
+.moving-text {
+  position: absolute;
+  bottom: 30%;
+  left: 40px;
+  right: 40px;
+  z-index: 3;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.1); /* transparent glass effect */
+  backdrop-filter: blur(5px); /* optional glassmorphism */
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.moving-text-content {
+  display: inline-block;
+  white-space: nowrap;
+  color: white;
+  font-weight: bold;
+  animation: slide 10s linear infinite;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100vw);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    bottom: 42%;
+    padding: 0 20px 60px;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-title span {
+    font-size: 3rem;
+  }
+  .moving-text {
+    left: 20px;
+    right: 20px;
+  }
+}

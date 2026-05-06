@@ -1,0 +1,107 @@
+/* Page layout */
+.page-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-page {
+  background-color: #1507d6;
+}
+
+/* Form box */
+.form-container {
+  width: 400px;
+  min-height: 500px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  font-family:   Arial, sans-serif; 
+
+}
+
+/* Titles */
+.form-title {
+  margin-bottom: 5px;
+  font-size: 25px;
+}
+
+.form-subtitle {
+  font-size: 15px;
+  color: gray;
+  margin-bottom: 20px;
+}
+
+/* Inputs */
+.input-group {
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.input-label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Password container */
+.password-container {
+  display: flex;
+}
+
+.toggle-password-button {
+  margin-left: 5px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+/* Options row */
+.options-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.checkbox-label input[type="checkbox"] {
+  accent-color: #1025e7;
+  margin-right: 6px;
+}
+
+/* Button */
+.sign-up-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1507d6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+
+
+
+/* Footer */
+.footer-text {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.login-link,
+.signup-link,
+.forgot-password-link {
+  color: #1025e7;
+  cursor: pointer;
+  text-decoration: none;
+}

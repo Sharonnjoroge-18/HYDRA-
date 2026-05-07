@@ -3,7 +3,7 @@ import sportImg from "../assets/images/visual.png";
 
 const UsageSection = () => {
   return (
-    <section className="usage-section">
+    <section className="usage-section" id="usage">
       
       <h2 className="usage-title">Fuel Every Moment</h2>
       <p className="usage-subtitle">

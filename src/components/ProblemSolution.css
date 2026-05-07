@@ -2,6 +2,7 @@
   --text-color: black;
   --body-font: 'Helvetica Neue', Arial, sans-serif;
   --max-width: 1000px;
+
 }
 
 .page-container {
@@ -11,6 +12,7 @@
   padding: 80px 20px 60px;
   background-color: #ffffff;
   scroll-margin-top: 90px;
+  
 }
 
 /* Header Styles */

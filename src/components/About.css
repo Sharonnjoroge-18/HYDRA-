@@ -1,11 +1,19 @@
 .about-section {
-  padding: 120px 40px;
-  background: #f8f9fb;
+  width: 100%;
+  min-height: 100svh;
+  scroll-margin-top: 80px;
+  padding: 120px 20px;
+   background-image: url('../assets/images/solhydra2.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
 }
 
 .about-container {
-  max-width: 1000px;
+  width: 100%;
+  max-width: 1440px;
   margin: auto;
+  
 }
 
 .about-title {
@@ -13,28 +21,119 @@
   line-height: 1;
   margin-bottom: 36px;
   text-align: center;
+  color: white;
+}
+
+.about-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
+  gap: 48px;
+  align-items: center;
+  padding: 34px;
+  border: 1px solid #dfe9f7;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 22px 60px rgba(10, 79, 214, 0.08);
+}
+
+.about-copy,
+.ingredients-copy {
+  border-left: 4px solid var(--brand-blue);
+  padding-left: 22px;
+}
+
+.about-kicker {
+  margin-bottom: 12px;
+  color: var(--brand-blue);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .about-text {
-  font-size: 22px;
+  font-size: 24px;
   line-height: 1.8;
   margin-bottom: 32px;
-  color: #333;
+  color:black;
 }
 
 .about-image-wrap {
-  margin-top: 56px;
   width: 100%;
-  max-height: 500px;
   overflow: hidden;
   border-radius: 8px;
+  background: #dfe9f7;
+  box-shadow: 0 16px 36px rgba(7, 27, 61, 0.14);
 }
 
 .about-image {
   display: block;
   width: 100%;
-  height: 500px;
+  height: 440px;
   object-fit: cover;
+}
+
+.about-details {
+  margin-top: 64px;
+  padding: 34px;
+  border: 1px solid #dfe9f7;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.about-subtitle {
+  font-size: 32px;
+  margin-bottom: 18px;
+  color: #071b3d;
+}
+
+.about-details-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(240px, 0.75fr);
+  gap: 36px;
+  align-items: start;
+}
+
+.about-details-grid .about-text {
+  margin-bottom: 0;
+}
+
+.nutrition-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #e1e7f0;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 14px 35px rgba(7, 27, 61, 0.08);
+}
+
+.nutrition-table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  color: #222;
+}
+
+.nutrition-table th,
+.nutrition-table td {
+  padding: 16px 18px;
+  border-bottom: 1px solid #e1e7f0;
+  text-align: left;
+  font-size: 16px;
+}
+
+.nutrition-table th {
+  background: #eef4ff;
+  color: #0a2f78;
+  font-weight: 700;
+}
+
+.nutrition-table tr:last-child td {
+  border-bottom: none;
+}
+
+.nutrition-table tbody tr:nth-child(even) {
+  background: #f8fbff;
 }
 
 @media (max-width: 768px) {
@@ -50,12 +149,28 @@
     font-size: 18px;
   }
 
-  .about-image-wrap {
-    margin-top: 36px;
-    max-height: 340px;
+  .about-intro {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 22px;
   }
 
   .about-image {
     height: 340px;
+  }
+
+  .about-details {
+    margin-top: 40px;
+    padding: 22px;
+  }
+
+  .about-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nutrition-table th,
+  .nutrition-table td {
+    padding: 14px 16px;
+    font-size: 15px;
   }
 }

@@ -1,10 +1,10 @@
-import heroImage from "../assets/images/solhydra1.png";
+import heroImage from "../assets/images/solinvert.jpeg";
 import "./Hero.css";
 
 
 const Hero = () => {
   return (
-    <section className="hero-container">
+    <section className="hero-container" id="hero">
       <img
         src={heroImage}
         alt="SolHydra Sparkling Water"
@@ -17,14 +17,28 @@ const Hero = () => {
           Hydrate Better. <br />
            <span>Stay Sharp Daily</span>
         </h1>
+      </div>
 
-     
-      </div>
-      <div className="moving-text">
-        <span className="moving-text-content">
-          ◆ Clean electrolyte hydration designed for life in heat ◆
-        </span>
-      </div>
+      <a className="hero-btn" href="#problem-solution">
+        <span>Read More</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <line x1="5" y1="12" x2="19" y2="12" />
+          <polyline points="12 5 19 12 12 19" />
+        </svg>
+      </a>
+
     </section>
   );
 };

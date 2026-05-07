@@ -1,6 +1,6 @@
 import './ProblemSolution.css';
 import Pic1 from '../assets/images/products.png';
-import Need from '../assets/images/Need.jpg';
+import Need from '../assets/images/tired.jpg';
 import Solution from '../assets/images/Solution.png';
 const ProblemSolution = () => {
   const sections = [
@@ -28,7 +28,7 @@ const ProblemSolution = () => {
     <div className="page-container" id="problem-solution">
       <header className="page-header">
         <h1>Health is a process.</h1>
-        <p>SolHydra Co-Founder Sharon shares the health journey that sparked a Refreshement Rebellion.</p>
+        <p>SolHydra Co-Founders shares their health journey that sparked a Refreshement Rebellion.</p>
       </header>
 
       <main className="content-stack">

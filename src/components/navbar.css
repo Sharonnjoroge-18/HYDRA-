@@ -4,8 +4,8 @@
   width: 100%;
   height: 80px;
   z-index: 1000;
-  background: var(--brand-blue);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   display: flex;
   align-items: center;
 }
@@ -21,7 +21,7 @@
 }
 
 .nav-logo {
-  color: white;
+  color: #000000;
   font-size: 1.5rem;
   font-weight: 900;
   letter-spacing: 2px;
@@ -35,7 +35,7 @@
 }
 
 .nav-links a {
-  color: rgba(255, 255, 255, 0.9);
+  color: #000000;
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
@@ -43,7 +43,7 @@
 }
 
 .nav-links a:hover {
-  color: white;
+  color: #000000;
 }
 
 .nav-icon-link {
@@ -76,7 +76,7 @@
   font-size: 0.9rem;
   cursor: pointer;
   text-decoration: none;
-  border: 1px solid transparent;
+  border: 1px solid gray;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 }
 
@@ -91,12 +91,12 @@
 
 .nav-btn--secondary {
   background: transparent;
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.75);
+  color: #000000;
+  border-color: rgba(0, 0, 0, 0.3);
 }
 
 .nav-btn--secondary:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.06);
 }
 
 @media (max-width: 768px) {

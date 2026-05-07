@@ -8,6 +8,7 @@ import Footer from './components/footer';
 import Navbar from './components/navbar';
 import UsageSection from './components/usage';
 import About from './components/About';
+import Cart from './components/cart';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/problem-solution" element={<Navigate to="/#problem-solution" replace />} />
         <Route path="/ProblemSolution" element={<Navigate to="/#problem-solution" replace />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="*" element={<Navigate to="/" replace />} />

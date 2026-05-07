@@ -1,17 +1,50 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { api } from '../api';
 import './Shop.css';
 import productImg from '../assets/images/solhydra2.png';
 
-const sizes = [
-  { label: '2L', price: 2050 },
-  { label: '1L', price: 1050 },
-  { label: '750ml', price: 750 },
-  { label: '500ml', price: 500 },
-];
-
 const Shop = () => {
   const [quantity, setQuantity] = useState(1);
-  const [selectedSize, setSelectedSize] = useState('2L');
+  const [products, setProducts] = useState([]);
+  const [selectedProductId, setSelectedProductId] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const data = await api.products.getAll();
+        setProducts(data);
+        setSelectedProductId(data[0]?.id ?? null);
+      } catch (err) {
+        setError(err.message || 'Failed to load products');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, []);
+
+  const selectedProduct = products.find((product) => product.id === selectedProductId);
+
+  const handleAddToCart = async () => {
+    if (!selectedProductId) return;
+
+    try {
+      await api.cart.add(selectedProductId, quantity);
+      navigate('/cart');
+    } catch (err) {
+      if (err.message.toLowerCase().includes('not authenticated') || err.message.toLowerCase().includes('unauthorized')) {
+        navigate('/login');
+        return;
+      }
+
+      setError(err.message || 'Failed to add item to cart');
+    }
+  };
 
   return (
     <section className="shop-section">
@@ -25,37 +58,39 @@ const Shop = () => {
         </div>
 
         <div className="shop-details">
-          <h1 className="product-title">
-            Hydra Original Drink <br />
-          </h1>
-          <p className="subtitle">0 Sugar</p>
+          <h1 className="product-title">Hydra Original Drink</h1>
+          <p className="subtitle">{selectedProduct?.variant ?? 'Clean hydration'}</p>
 
           <p className="product-description">
-            Unlock Peak Performance. This scientifically balanced formula replaces
-            the essential minerals - Sodium, Potassium, and Magnesium - that water
-            alone can't provide.
+            {selectedProduct?.description ||
+              "Unlock peak performance with balanced electrolytes that water alone can't provide."}
           </p>
 
-          <div className="size-section">
-            <div className="size-header">
-              <span>Select Size</span>
-              <span>Required</span>
-            </div>
+          {error && <p className="error-message">{error}</p>}
+          {loading && <p>Loading products...</p>}
 
-            {sizes.map((size) => (
-              <label key={size.label} className="size-option">
-                <input
-                  type="radio"
-                  name="size"
-                  value={size.label}
-                  checked={selectedSize === size.label}
-                  onChange={() => setSelectedSize(size.label)}
-                />
-                <span>{size.label}</span>
-                <span>Ksh {size.price}</span>
-              </label>
-            ))}
-          </div>
+          {!loading && (
+            <div className="size-section">
+              <div className="size-header">
+                <span>Select Product</span>
+                <span>Required</span>
+              </div>
+
+              {products.map((product) => (
+                <label key={product.id} className="size-option">
+                  <input
+                    type="radio"
+                    name="product"
+                    value={product.id}
+                    checked={selectedProductId === product.id}
+                    onChange={() => setSelectedProductId(product.id)}
+                  />
+                  <span>{product.name}</span>
+                  <span>Ksh {product.price}</span>
+                </label>
+              ))}
+            </div>
+          )}
 
           <div className="bottom-controls">
             <div className="quantity">
@@ -66,17 +101,19 @@ const Shop = () => {
               <button onClick={() => setQuantity(quantity + 1)}>+</button>
             </div>
 
-            <button className="add-btn">Add To Cart</button>
+            <button className="add-btn" onClick={handleAddToCart} disabled={loading || !selectedProductId}>
+              Add To Cart
+            </button>
           </div>
 
           <div className="product-features">
             <div className="feature">
-              <strong>Source</strong>
-              <span>Alpine Springs</span>
+              <strong>Stock</strong>
+              <span>{selectedProduct?.stock ?? 0} available</span>
             </div>
             <div className="feature">
-              <strong>Carbonation</strong>
-              <span>Light & Crisp</span>
+              <strong>Formula</strong>
+              <span>{selectedProduct?.variant ?? 'Balanced'}</span>
             </div>
           </div>
         </div>

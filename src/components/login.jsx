@@ -1,128 +1,109 @@
-import { Component } from "react";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../AuthContext";
 import "./login.css";
-import { Link } from "react-router-dom";
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: "",
-      password: "",
-      rememberMe: false,
-      error: "",
-    };
-  }
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
-  handleEmailChange = (event) => {
-    this.setState({ email: event.target.value, error: "" });
-  };
-
-  handlePasswordChange = (event) => {
-    this.setState({ password: event.target.value, error: "" });
-  };
-
-  handleCheckboxChange = (event) => {
-    this.setState({ rememberMe: event.target.checked });
-  };
-
-  handleSignUp = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const { email, password } = this.state;
+    setError("");
 
     if (!email || !password) {
-      this.setState({ error: "All fields are required" });
+      setError("All fields are required");
       return;
     }
 
     if (password.length < 8) {
-      this.setState({ error: "Password must be at least 8 characters" });
+      setError("Password must be at least 8 characters");
       return;
     }
 
-    console.log("Form submitted:", { email, password });
-    this.setState({ error: "" });
+    try {
+      setLoading(true);
+      await login(email, password);
+      navigate("/shop");
+    } catch (err) {
+      setError(err.message || "Login failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  render() {
-    return (
-      <div className="auth-page login-page">
-        <div className="form-container">
+  return (
+    <div className="auth-page login-page">
+      <div className="form-container">
+        <h2 className="form-title">Log In</h2>
+        <p className="form-subtitle">
+          Welcome back! Please enter your details to log in.
+        </p>
 
-          <h2 className="form-title">Log In</h2>
-          <p className="form-subtitle">
-            Welcome back! Please enter your details to log in.  
-          </p>
+        {error && <div className="error-message">{error}</div>}
 
-          {this.state.error && (
-            <div className="error-message">{this.state.error}</div>
-          )}
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label className="input-label">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              placeholder="Enter your email"
+              className="input-field"
+              required
+            />
+          </div>
 
-          <form onSubmit={this.handleSignUp}>
-            {/* Email */}
-            <div className="input-group">
-              <label className="input-label">Email ID</label>
+          <div className="input-group">
+            <label className="input-label">Password</label>
+            <div className="password-container">
               <input
-                type="email"
-                value={this.state.email}
-                onChange={this.handleEmailChange}
-                placeholder="Enter your email"
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                placeholder="Enter your password"
                 className="input-field"
                 required
+                minLength={8}
               />
             </div>
+          </div>
 
-            {/* Password */}
-            <div className="input-group">
-              <label className="input-label">Password</label>
-              <div className="password-container">
-                <input
-                  type="password"
-                  value={this.state.password}
-                  onChange={this.handlePasswordChange}
-                  placeholder="Enter your password"
-                  className="input-field"
-                  required
-                  minLength={8}
-                />
-              </div>
+          <div className="options-row">
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={(event) => setRememberMe(event.target.checked)}
+              />
+              Remember Me
+            </label>
 
-            </div>
+            <a href="#" className="forgot-password-link">
+              Forgot Password?
+            </a>
+          </div>
 
-            {/* Options */}
-            <div className="options-row">
-              <label className="checkbox-label">
-                <input
-                  type="checkbox"
-                  checked={this.state.rememberMe}
-                  onChange={this.handleCheckboxChange}
-                />
-                Remember Me
-              </label>
+          <button type="submit" className="log-in-button" disabled={loading}>
+            {loading ? "Logging in..." : "Log In"}
+          </button>
+        </form>
 
-              <a href="#" className="forgot-password-link">
-                Forgot Password?
-              </a>
-            </div>
-
-            {/* log In Button */}
-            <button type="submit" className="log-in-button">
-              Log In
-            </button>
-          </form>
-
-
-          {/* Footer */}
-          <p className="footer-text">
-            Don't have an account?{" "}
-            <Link to="/signup" className="login-link">
-              Sign Up
-            </Link>
-          </p>
-
-        </div>
+        <p className="footer-text">
+          Don't have an account?{" "}
+          <Link to="/signup" className="login-link">
+            Sign Up
+          </Link>
+        </p>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Login;

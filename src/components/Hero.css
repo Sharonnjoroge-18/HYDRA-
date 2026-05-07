@@ -2,6 +2,8 @@
 .hero-container {
   position: relative;
   width: 100%;
+  margin-bottom: 20px;
+  border-radius: 30px;
   scroll-margin-top: 80px;
   height: 100vh; /* Fallback */
   height: 100svh; /* Small viewport height (better for mobile browser UI) */
